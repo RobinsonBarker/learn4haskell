@@ -490,7 +490,7 @@ Implement a function that returns the last digit of a given number.
   whether it works for you!
 -}
 lastDigit :: Int -> Int
-lastDigit n = mod n 10
+lastDigit n = mod (abs n) 10
 
 
 {- |
@@ -520,7 +520,7 @@ branches because it is an expression and it must always return some value.
   satisfying the check will be returned and, therefore, evaluated.
 -}
 closestToZero :: Int -> Int -> Int
-closestToZero x y = error "closestToZero: not implemented!"
+closestToZero x y = if (abs x) < (abs y) then x else y
 
 
 {- |
@@ -553,8 +553,10 @@ value after "=" where the condition is true.
 
 Casual reminder about adding top-level type signatures for all functions :)
 -}
-
-mid x y z = error "mid: not implemented!"
+mid :: Int -> Int -> Int -> Int
+mid x y z
+  | x < y = if x < z then min y z else x
+  | otherwise = if x > z then max y z else x
 
 {- |
 =⚔️= Task 8
@@ -568,7 +570,18 @@ True
 >>> isVowel 'x'
 False
 -}
-isVowel c = error "isVowel: not implemented!"
+isVowel c
+  |c=="a" = True
+  |c=="A" = True
+  |c=="e" = True
+  |c=="E" = True
+  |c=="i" = True
+  |c=="I" = True
+  |c=="o" = True
+  |c=="O" = True
+  |c=="u" = True
+  |c=="O" = True
+  |otherwise = False
 
 
 {- |
@@ -631,8 +644,8 @@ Implement a function that returns the sum of the last two digits of a number.
 Try to introduce variables in this task (either with let-in or where) to avoid
 specifying complex expressions.
 -}
-
-sumLast2 n = error "sumLast2: Not implemented!"
+sumLast2 :: Int -> Int
+sumLast2 n = if (abs n)<10 then (abs n) else (if (abs n)<100 then (div (abs n) 10)+(mod (abs n) 10) else sumLast2 (mod (abs n) 100))
 
 
 {- |
@@ -652,8 +665,10 @@ Implement a function that returns the first digit of a given number.
 You need to use recursion in this task. Feel free to return to it later, if you
 aren't ready for this boss yet!
 -}
-
-firstDigit n = error "firstDigit: Not implemented!"
+firstDigit :: Int -> Int
+firstDigit n  
+  | n < 10 = n
+  | otherwise = firstDigit (n `div` 10) 
 
 
 {-
